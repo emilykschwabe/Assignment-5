@@ -18,9 +18,13 @@ library(ggplot2)
 ```{r}
 setwd("~/Desktop/WinQ_2021/Fish497/Assignment-5")
 fish_data <- read.csv("data/siscowet.csv")
+reduced_fish_data <- select(fish_data,locID, len, wgt)
 ```
 ## Figure 
 
 ```{r}
-p1 <- qplot(len, wgt, data = fish_data, colour = cyl)
+ggplot(reduced_fish_data, aes(x=len, y=wgt)) + geom_point()
+
+
+
 ````
