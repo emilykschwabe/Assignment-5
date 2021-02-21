@@ -7,24 +7,48 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Packages
+# Packages
 
 ```{r}
 library(tidyverse)
+library(dplyr)
 library(ggplot2)
+library(GGally)
 ```
 
-## Data 
+# Data 
 ```{r}
 setwd("~/Desktop/WinQ_2021/Fish497/Assignment-5")
 fish_data <- read.csv("data/siscowet.csv")
 reduced_fish_data <- select(fish_data,locID, len, wgt)
 ```
-## Figure 
 
+
+# Figures
+
+
+## Length vs Weight Subplots
 ```{r}
-ggplot(reduced_fish_data, aes(x=len, y=wgt)) + geom_point()
+ggplot(reduced_fish_data, aes(x=len,y=wgt)) +
+ geom_point() +
+  xlab("Length (mm)") +
+  ylab("Weight (g)") +
+  facet_wrap('locID') 
+
+```
+
+## Violin Plot
+```{r}
+
+p = ggplot(fish_data, aes( x = len, y = wgt, fill = locID))
+p + geom_violin()
+
+```
+
+## Box Plot 
+```{r}
+p = ggplot(fish_data, aes( x = len, y = wgt, fill = locID))
+p + geom_boxplot()
 
 
-
-````
+```
