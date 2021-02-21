@@ -1,6 +1,8 @@
 ---
 title: "Graphic_Exploration"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +22,6 @@ library(GGally)
 ```{r}
 setwd("~/Desktop/WinQ_2021/Fish497/Assignment-5")
 fish_data <- read.csv("data/siscowet.csv")
-reduced_fish_data <- select(fish_data,locID, len, wgt)
 ```
 
 
