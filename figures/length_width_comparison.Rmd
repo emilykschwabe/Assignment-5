@@ -1,5 +1,5 @@
 ---
-title: "Fish-Code"
+title: "Graphic_Exploration"
 output: html_document
 ---
 
@@ -27,25 +27,54 @@ reduced_fish_data <- select(fish_data,locID, len, wgt)
 # Figures
 
 
-## Length vs Weight Subplots
+### Length vs Weight 
 ```{r}
-ggplot(reduced_fish_data, aes(x=len,y=wgt)) +
- geom_point() +
-  xlab("Length (mm)") +
-  ylab("Weight (g)") +
-  facet_wrap('locID') 
+ggplot(fish_data, aes(x=len,
+            y=wgt,
+            color=locID)) +
+        geom_point()+ 
+        ylab("Weight (g)") + 
+        xlab("Length (mm)") + 
+labs(color="Lake Location",
+           title = "Siscowet Lake Trout body mass 
+     increases with body length")+
+          scale_color_viridis_d()+
+        theme_minimal() + 
+  theme(axis.title.y = element_text(angle = 0, vjust = 0.5,size=14),
+              axis.text = element_text(size=12)) + 
+          geom_smooth(method = "lm", se = FALSE)
 
 ```
 
-## Violin Plot
+### Length vs Weight Subplots
+```{r}
+ggplot(fish_data, aes(x=len,
+            y=wgt,
+            color=locID)) +
+        geom_point()+ 
+        ylab("Weight (g)") + 
+        xlab("Length (mm)") +
+  facet_wrap("locID")+
+labs(color="Lake Location",
+           title = "Siscowet Lake Trout body mass 
+     increases with body length")+
+          scale_color_viridis_d()+
+        theme_minimal() + 
+  theme(axis.title.y = element_text(angle = 0, vjust = 0.5,size=14),
+              axis.text = element_text(size=12)) + 
+          geom_smooth(method = "lm", se = FALSE)
+
+```
+
+### Violin Plot os Sex vs Weight 
 ```{r}
 
-p = ggplot(fish_data, aes( x = len, y = wgt, fill = locID))
+p = ggplot(fish_data, aes( x = sex, y = wgt, fill = locID))
 p + geom_violin()
 
 ```
 
-## Box Plot 
+### Box Plot of Length vs Weight 
 ```{r}
 p = ggplot(fish_data, aes( x = len, y = wgt, fill = locID))
 p + geom_boxplot()
